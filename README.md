@@ -1,0 +1,2 @@
+# mnemonic-generator
+Generates mnemonics
