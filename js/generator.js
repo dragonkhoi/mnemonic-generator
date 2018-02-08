@@ -2,7 +2,7 @@ var wordToPronunciation = {};
 var pronunciationToWord = {};
 
 var wordTrie = new Trie();
-var pronunciationTrie = new Trie();
+var pronunciationTrie = new ArrTrie();
 
 // build the dictionary
 var toProcess = dictionaryString;
@@ -13,11 +13,15 @@ while(toProcess != ""){
     var pipeIndex = toProcess.indexOf("|");
     var pron = toProcess.substring(0, pipeIndex - 1);
     toProcess = toProcess.substring(pipeIndex + 2);
+    // console.log(pron);
+    var pronSplit = pron.split(" ");
+    // console.log(pronSplit);
+
     if(!wordToPronunciation[word]){
-      wordToPronunciation[word] = [pron];
+      wordToPronunciation[word] = pron;
     }
     else{
-      wordToPronunciation[word].push(word);
+      wordToPronunciation[word].push(pron);
     }
     if(!pronunciationToWord[pron]){
       pronunciationToWord[pron] = [word];
@@ -27,8 +31,11 @@ while(toProcess != ""){
       pronunciationToWord[pron].push(word);
     }
     wordTrie.add(word);
-    pronunciationTrie.add(pron);
+    pronunciationTrie.add(pronSplit);
 }
+//console.log(wordToPronunciation["!EXCLAMATION-POINT"]);
+//console.log(wordToPronunciation);
+
 //console.log(pronunciationToWord);
 //console.log(pronunciationTrie);
 
@@ -37,23 +44,32 @@ function findVal(){
   console.log(searchText);
   console.log(wordTrie.contains(searchText));
   console.log(wordToPronunciation[searchText]);
-  var pron = wordToPronunciation[searchText][0];
+  // search for phonemes one at a time
+  // once a final phoneme is found, save it
+  var pron = wordToPronunciation[searchText];
+  var pronSplit = pron.split(" ");
+  console.log(pron);
   var currentNode = pronunciationTrie.root;
   var searchPron = "";
   var soundsWithin = [];
   console.log(currentNode);
-  for(var i = 0; i < pron.length; i++){
+  for(var i = 0; i < pronSplit.length; i++){
     var foundMatch = false;
     for(nodeChild in currentNode.children){
-      //console.log(nodeChild);
-      if(pron[i] == nodeChild){
+      console.log(nodeChild);
+      if(pronSplit[i] == nodeChild){
         console.log(currentNode.children[nodeChild]);
         currentNode = currentNode.children[nodeChild];
         if(currentNode.word != null && currentNode.word != ""){
           soundsWithin.push(currentNode.word);
           console.log("this is a word: " + currentNode.word);
         }
-        searchPron += pron[i];
+        if(searchPron != ""){
+          searchPron += " " + pronSplit[i];
+        }
+        else {
+          searchPron += pronSplit[i];
+        }
         foundMatch = true;
         break;
       }

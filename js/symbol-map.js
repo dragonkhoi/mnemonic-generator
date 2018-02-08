@@ -1,0 +1,89 @@
+var symbolMap = {
+  AA: 1,
+AA0: 2,
+AA1: 3,
+AA2: 4,
+AE: 5,
+AE0: 6,
+AE1: 7,
+AE2: 8,
+AH: 9,
+AH0: 10,
+AH1: 11,
+AH2: 12,
+AO: 13,
+AO0: 14,
+AO1: 15,
+AO2: 16,
+AW: 17,
+AW0: 18,
+AW1: 19,
+AW2: 20
+AY
+AY0
+AY1
+AY2
+EH
+EH0
+EH1
+EH2
+ER
+ER0
+ER1
+ER2
+EY
+EY0
+EY1
+EY2
+B
+CH
+D
+DH
+IH
+IH0
+IH1
+IH2
+IY
+IY0
+IY1
+IY2
+OW
+OW0
+OW1
+OW2
+OY
+OY0
+OY1
+OY2
+UH
+UH0
+UH1
+UH2
+UW
+UW0
+UW1
+UW2
+F
+G
+HH
+
+JH
+K
+L
+M
+N
+NG
+
+P
+R
+S
+SH
+T
+TH
+
+V
+W
+Y
+Z
+ZH
+}
